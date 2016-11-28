@@ -4,14 +4,19 @@
 using namespace cv;
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) {
 
-  Mat image = imread("example_mask.png", IMREAD_UNCHANGED);
+  if( argc != 2) {
+    cout << "Usage: display_image ImageToLoadAndDisplay" << endl;
+    return -1;
+  }
 
-  printf("mask is of size (%d, %d, %d)\n", image.rows, image.cols, image.channels());
+  Mat image = imread(argv[1], IMREAD_UNCHANGED);
+
+  printf("Size of mask = (%d, %d, %d)\n", image.rows, image.cols, image.channels());
 
   // Check for invalid input
-  if(!image.data) {
+  if (!image.data) {
     cout << "Could not open or find the image" << std::endl;
     return -1;
   }
